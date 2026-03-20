@@ -1,6 +1,3 @@
-#ifndef APPLICATION_H
-#define APPLICATION_H
-
 #include "FlightManager.h"
 #include <string>
 
@@ -24,4 +21,3 @@ public:
     void shutdown();
 };
 
-#endif // APPLICATION_H

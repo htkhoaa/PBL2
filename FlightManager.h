@@ -4,23 +4,25 @@
 #include "Flight.h"
 #include <string>
 
+using namespace std;
+
 class FlightManager {
 private:
     Flight* currentFlight;
-    const std::string inputFile;
-    const std::string outputFile;
+    const string inputFile;
+    const string outputFile;
 
 public:
-    FlightManager(const std::string& inFile, const std::string& outFile);
+    FlightManager(const string& inFile, const string& outFile);
     ~FlightManager();
 
     bool isFlightActive() const;
-    void openFlight(const std::string& fCode, int maxSeats);
+    void openFlight(const string& fCode, int maxSeats);
     void closeFlight();
     
     Flight* getCurrentFlight() const;
     void displayFinalMapping() const;
-    std::string getOutputFile() const;
+    string getOutputFile() const;
 };
 
-#endif // FLIGHT_MANAGER_H
+

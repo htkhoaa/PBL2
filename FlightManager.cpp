@@ -1,8 +1,9 @@
 #include "FlightManager.h"
 #include <iostream>
 #include <fstream>
+using namespace std;
 
-FlightManager::FlightManager(const std::string& inFile, const std::string& outFile)
+FlightManager::FlightManager(const string& inFile, const string& outFile)
     : currentFlight(nullptr), inputFile(inFile), outputFile(outFile) {
 }
 
@@ -16,23 +17,23 @@ bool FlightManager::isFlightActive() const {
     return currentFlight != nullptr;
 }
 
-void FlightManager::openFlight(const std::string& fCode, int maxSeats) {
+void FlightManager::openFlight(const string& fCode, int maxSeats) {
     if (isFlightActive()) {
-        std::cout << "A flight check-in is already in progress. Please 'Close' it first.\n";
+        cout << "A flight check-in is already in progress. Please 'Close' it first.\n";
         return;
     }
     
     currentFlight = new Flight(fCode, maxSeats);
     currentFlight->loadInitialSeats(inputFile);
-    currentFlight->displayFlightInfo();
+    currentFlight->displayFlightInfo();     
 }
 
 void FlightManager::closeFlight() {
     if (!isFlightActive()) {
-        std::cout << "No flight is active right now. Please 'Open' a flight first.\n";
+        cout << "No flight is active right now. Please 'Open' a flight first.\n";
         return;
     }
-    std::cout << "\nClosing check-in for flight " << currentFlight->getFlightCode() << "...\n";
+    cout << "\nClosing check-in for flight " << currentFlight->getFlightCode() << "...\n";
     displayFinalMapping();
     
     delete currentFlight;
@@ -43,24 +44,24 @@ Flight* FlightManager::getCurrentFlight() const {
     return currentFlight;
 }
 
-std::string FlightManager::getOutputFile() const {
+string FlightManager::getOutputFile() const {
     return outputFile;
 }
 
 void FlightManager::displayFinalMapping() const {
-    std::ifstream inFile(outputFile);
+    ifstream inFile(outputFile);
     if (!inFile) {
-        std::cerr << "Error: Cannot open booking output file (" << outputFile << ").\n";
+        cerr << "Error: Cannot open booking output file (" << outputFile << ").\n";
         return;
     }
 
-    std::cout << "\n==================================================\n";
-    std::cout << " FINAL BOOKING MAPPING (Content of " << outputFile << ")\n";
-    std::cout << "==================================================\n";
-    std::string line;
-    while (std::getline(inFile, line)) {
-        std::cout << " " << line << "\n";
+    cout << "\n==================================================\n";
+    cout << " FINAL BOOKING MAPPING (Content of " << outputFile << ")\n";
+    cout << "==================================================\n";
+    string line;
+    while (getline(inFile, line)) {
+        cout << " " << line << "\n";
     }
-    std::cout << "==================================================\n";
+    cout << "==================================================\n";
     inFile.close();
 }

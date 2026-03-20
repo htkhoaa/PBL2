@@ -1,0 +1,10 @@
+Open
+ITF001
+2
+TK001
+TK002
+y
+Close
+Close
+y
+Exit
